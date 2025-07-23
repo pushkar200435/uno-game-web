@@ -1,13 +1,16 @@
 # UNO Game (Web)
 
-A beautiful, modern UNO card game for the browser! Play against AI or with friends in offline pass-and-play mode. Features a stylish UI, sound effects, and more.
+This is a browser-based UNO card game built with HTML, CSS, and JavaScript. It features two modes of play:
+- **AI Mode**: Play against computer players.
+- **Offline Multiplayer Mode**: Play locally with friends using "pass and play."
 
 ## 🎮 Features
-- **AI Mode**: Play against computer opponents (index.html)
-- **Offline Multiplayer**: Pass & play with up to 4 players on one device (offline-multiplayer.html)
-- **Sound Effects**: Card play, draw, error, win, UNO call, and more
-- **Modern UI**: Responsive, mobile-friendly, and visually appealing
-- **Mode Selector**: Landing page to choose between AI and Multiplayer (mode-select.html)
+- Smooth card animations and interactions
+- Realistic UNO gameplay with rules like skip, reverse, draw two, wild, and draw four
+- Dynamic sound effects (play, draw, error, win, UNO!)
+- Responsive design and interactive UI
+- "UNO" shout and penalty logic
+- Single-player (vs CPU) and local multiplayer support
 
 ## 🗂️ File Structure
 ```
@@ -28,6 +31,16 @@ uno-game/
 │   └── uno.mp3
 └── README.md                 # This file
 ```
+## 🔊 Sound Effects
+
+Make sure the `/sounds/` folder exists and contains these files:
+- `play.mp3` – Card played
+- `draw.mp3` – Card drawn
+- `error.mp3` – Invalid action
+- `win.mp3` – Game win
+- `uno.mp3` – "UNO!" shout
+
+These are used in `sounds.js`.
 
 ## 🚀 Getting Started
 1. **Clone or Download** this repository.
@@ -41,10 +54,17 @@ uno-game/
 - **Offline Multiplayer**: Enter player names, pass the device, and play turn by turn. The game handles turn transitions and rules.
 - **Sound**: Make sure your browser allows audio for the best experience.
 
+## 💡 Future Enhancements
+
+- Online multiplayer with WebSockets
+- Improved AI strategy
+- Mobile gesture support
+- Score tracking and game history
+
 ## ✨ Credits
-- UI & logic by [Your Name]
+- UI & logic by Pushkar Karmakar
 - UNO is a trademark of Mattel. This project is for educational/personal use only.
 
 ---
 
-Enjoy the game! If you find bugs or want to contribute, feel free to open an issue or PR. "# uno-game-web" 
+Enjoy the game! If you find bugs or want to contribute, feel free to open an issue or PR. 
