@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+:root {
+    --red: #ff5555;
+    --yellow: #ffaa00;
+    --green: #55aa55;
+    --blue: #5555ff;
+    --black: #2c2c2c;
+    --white: #ffffff;
+    --primary-bg: #1a1a1a;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--white);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* --- Setup Screen --- */
+#setup-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #2a3d31 0%, #1a1a1a 100%);
+}
+
+#setup-screen h1 {
+    font-size: 3rem;
+    color: var(--white);
+    text-shadow: 0 0 15px var(--green);
+    margin-bottom: 20px;
+}
+
+.setup-section {
+    background-color: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.setup-section label {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#player-count {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+#player-names-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.player-name-input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--white);
+    background-color: rgba(255,255,255,0.1);
+    color: var(--white);
+}
+
+#start-game-btn {
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--white);
+    background-color: var(--green);
+}
+#start-game-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(85, 170, 85, 0.7);
+}
+
+/* --- Game Board --- */
+#game-board {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+    max-height: 800px;
+    margin: auto;
+    background: radial-gradient(circle, #3a5a40 0%, #1e2a22 100%);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    display: none; /* Hidden by default */
+    grid-template-rows: 150px 1fr 150px;
+    grid-template-columns: 150px 1fr 150px;
+}
+
+.player-hand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    min-width: 120px;
+    min-height: 120px;
+}
+
+.player-hand.bottom { grid-column: 2 / 3; grid-row: 3 / 4; flex-wrap: wrap; }
+.player-hand.left { grid-column: 1 / 2; grid-row: 2 / 3; flex-direction: column; }
+.player-hand.top { grid-column: 2 / 3; grid-row: 1 / 2; }
+.player-hand.right { grid-column: 3 / 4; grid-row: 2 / 3; flex-direction: column; }
+
+.player-name {
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--white);
+    z-index: 100;
+    transition: box-shadow 0.3s, color 0.3s;
+}
+
+.bottom .player-name { bottom: -5px; }
+.left .player-name { left: -5px; writing-mode: vertical-rl; text-orientation: mixed; }
+.top .player-name { top: -5px; }
+.right .player-name { right: -5px; writing-mode: vertical-rl; text-orientation: mixed; }
+
+.active-player .player-name {
+    box-shadow: 0 0 15px #ffdd00;
+    color: #ffdd00;
+}
+
+.uno-card {
+    width: 80px;
+    height: 120px;
+    border-radius: 10px;
+    background-color: var(--black);
+    color: var(--white);
+    position: relative;
+    margin: 2px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    border: 2px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.player-hand.bottom .uno-card:hover { transform: translateY(-20px) scale(1.1); z-index: 100; }
+.uno-card.playable { box-shadow: 0 0 20px 5px #00ff00 !important; }
+.uno-card .card-value-sm { position: absolute; font-size: 18px; }
+.uno-card .card-value-sm.top-left { top: 5px; left: 10px; }
+.uno-card .card-value-sm.bottom-right { bottom: 5px; right: 10px; transform: rotate(180deg); }
+.uno-card .card-center-oval { width: 60px; height: 100px; background-color: var(--white); border-radius: 50% / 30%; transform: rotate(45deg); position: absolute; display: flex; justify-content: center; align-items: center; }
+.uno-card .card-center-value { transform: rotate(-45deg); color: var(--black); }
+
+.uno-card[data-color="red"] { background-color: var(--red); }
+.uno-card[data-color="yellow"] { background-color: var(--yellow); }
+.uno-card[data-color="green"] { background-color: var(--green); }
+.uno-card[data-color="blue"] { background-color: var(--blue); }
+.uno-card[data-color="black"] { background-color: var(--black); }
+
+.uno-card[data-color="black"] .card-center-value {
+    background: conic-gradient(red, yellow, lime, aqua, blue, magenta, red);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+.hidden-card {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300"><rect width="200" height="300" fill="%232c2c2c"/><ellipse cx="100" cy="150" rx="80" ry="40" fill="%23ff5555" transform="rotate(-30 100 150)"/><text x="50%" y="55%" text-anchor="middle" font-family="Poppins, sans-serif" font-size="100" font-weight="bold" fill="white">UNO</text></svg>');
+    background-size: cover; background-position: center; color: transparent;
+}
+
+.player-hand.left .hidden-card { margin: -90px 0; }
+.player-hand.top .hidden-card { margin: 0 -50px; }
+.player-hand.right .hidden-card { margin: -90px 0; }
+
+.center-area { grid-column: 2 / 3; grid-row: 2 / 3; display: flex; justify-content: center; align-items: center; gap: 20px; }
+.deck-pile, .discard-pile { width: 90px; height: 130px; border: 3px dashed rgba(255,255,255,0.5); border-radius: 10px; display: flex; justify-content: center; align-items: center; }
+.deck-pile .uno-card { cursor: pointer; }
+
+.game-message { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.8); padding: 20px 40px; border-radius: 15px; font-size: 24px; text-align: center; z-index: 1000; display: none; flex-direction: column; gap: 15px; }
+.color-picker { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: rgba(0,0,0,0.9); padding: 20px; border-radius: 50%; display: none; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; width: 150px; height: 150px; z-index: 2000; }
+.color-choice { width: 100%; height: 100%; cursor: pointer; transition: transform 0.2s; }
+.color-choice:hover { transform: scale(1.1); }
+.color-choice.red { background-color: var(--red); border-radius: 100% 0 0 0; }
+.color-choice.yellow { background-color: var(--yellow); border-radius: 0 100% 0 0; }
+.color-choice.green { background-color: var(--green); border-radius: 0 0 0 100%; }
+.color-choice.blue { background-color: var(--blue); border-radius: 0 0 100% 0; }
+
+.uno-button { position: absolute; bottom: 160px; right: 20px; width: 80px; height: 80px; border-radius: 50%; background-color: #e63946; color: white; font-size: 24px; font-weight: bold; border: 4px solid white; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.4); transition: transform 0.2s, background-color 0.2s; z-index: 500; }
+.uno-button:hover { transform: scale(1.1); }
+.uno-button.active { background-color: #fca311; }
+
+.overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 3000; color: white; text-align: center; }
+.overlay h1 { font-size: 60px; margin: 0; color: #ffdd00; }
+.overlay p { font-size: 24px; }
+.overlay button { margin-top: 30px; padding: 15px 30px; font-size: 20px; font-family: 'Poppins', sans-serif; background-color: #4CAF50; color: white; border: none; border-radius: 10px; cursor: pointer; transition: background-color 0.3s; }
+.overlay button:hover { background-color: #66bb6a; } 

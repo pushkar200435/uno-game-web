@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Multiplayer UNO</title>
+    <link rel="stylesheet" href="offline-multiplayer.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="setup-screen" class="overlay" style="display: flex;">
+            <div>
+                <h1>UNO: Pass & Play</h1>
+                <div class="setup-section">
+                    <label for="player-count">How many players?</label>
+                    <select id="player-count">
+                        <option value="2">2 Players</option>
+                        <option value="3">3 Players</option>
+                        <option value="4">4 Players</option>
+                    </select>
+                </div>
+                <div class="setup-section">
+                    <label>Player Names</label>
+                    <div id="player-names-container"></div>
+                </div>
+                <button id="start-game-btn">Start Game</button>
+            </div>
+        </div>
+        <div id="game-board">
+            <div class="player-hand bottom" id="player-hand-0"></div>
+            <div class="player-hand left" id="player-hand-1"></div>
+            <div class="player-hand top" id="player-hand-2"></div>
+            <div class="player-hand right" id="player-hand-3"></div>
+            <div class="center-area">
+                <div class="deck-pile"><div class="uno-card hidden-card" id="deck-card"></div></div>
+                <div class="discard-pile" id="discard-pile"></div>
+            </div>
+            <button class="uno-button" id="uno-button">UNO</button>
+        </div>
+    </div>
+    <div class="game-message" id="game-message"></div>
+    <div class="color-picker" id="color-picker">
+        <div class="color-choice red" data-color="red"></div>
+        <div class="color-choice yellow" data-color="yellow"></div>
+        <div class="color-choice green" data-color="green"></div>
+        <div class="color-choice blue" data-color="blue"></div>
+    </div>
+    <div id="turn-transition-screen" class="overlay">
+        <h1 id="turn-player-name"></h1>
+        <p>It's your turn!</p>
+        <button id="start-turn-btn">Show My Cards</button>
+    </div>
+    <div id="game-over-screen" class="overlay">
+        <h1 id="winner-message"></h1>
+        <p>Thanks for playing!</p>
+        <button id="new-game-btn">Play Again</button>
+    </div>
+    <script src="sounds.js"></script>
+    <script src="offline-multiplayer.js"></script>
+</body>
+</html> 
